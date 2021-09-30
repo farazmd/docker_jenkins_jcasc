@@ -1,0 +1,17 @@
+unclassified:
+  location:
+    url: http://${JENKINS_SERVER}:8080/
+jenkins:
+  systemMessage: "Jenkins configured using Jenkins Configuration as Code plugin\n\n"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: ${JENKINS_ADMIN_ID}
+         password: ${JENKINS_ADMIN_PASSWORD}
+
+tool:
+  git:
+    installations:
+      - name: git
+        home: /usr/local/bin/git
