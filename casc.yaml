@@ -14,6 +14,13 @@ jenkins:
       permissions:
         - "Overall/Administer:${JENKINS_ADMIN_ID}"
         - "Overall/Read:authenticated"
+  remotingSecurity:
+    enabled: true
+security:
+  queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: triggeringUsersAuthorizationStrategy
 
 tool:
   git:

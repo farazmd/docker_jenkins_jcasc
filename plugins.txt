@@ -2,6 +2,7 @@ ansicolor
 ant
 antisamy-markup-formatter
 authentication-tokens
+authorize-project
 block-queued-job
 branch-api
 build-pipeline-plugin
