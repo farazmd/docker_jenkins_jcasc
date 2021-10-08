@@ -8,8 +8,9 @@ USER root
 
 RUN apt-get update && apt-get upgrade -y && apt-get -y install sudo
 RUN apt-get install -y git python3 python3-pip python3-dev python3-venv
-RUN mkdir -p /home/jenkins && cd /home/jenkins && touch .bash_profile && \
-usermod -d /home/jenkins jenkins && chown -R jenkins:jenkins /home/jenkins
+RUN mkdir -p /home/jenkins && cd /home/jenkins && touch .bashrc && \
+usermod -d /home/jenkins jenkins && chown -R jenkins:jenkins /home/jenkins && \
+usermod --shell /bin/bash jenkins
 RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER jenkins

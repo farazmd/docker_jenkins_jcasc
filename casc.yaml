@@ -1,6 +1,8 @@
 unclassified:
   location:
     url: http://${JENKINS_SERVER}:8080/
+  shell:
+    shell: "/bin/bash"
 jenkins:
   systemMessage: "Jenkins configured using Jenkins Configuration as Code plugin\n\n"
   securityRealm:
