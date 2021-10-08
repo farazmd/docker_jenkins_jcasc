@@ -3,6 +3,7 @@ FROM jenkins/jenkins:lts-jdk11
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc.yaml
 ENV NVM_DIR /home/jenkins/.nvm
+ENV BASH_ENV /home/jenkins/.bashrc
 
 USER root
 
