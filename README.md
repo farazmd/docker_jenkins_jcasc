@@ -9,6 +9,7 @@ Jenkins setup on docker via Jenkins configuration as code (JCasC)
 
 ## Usage
 
+### Using locally via docker-compose
 - Create a .env file to set the following values:
   - `JENKINS_ADMIN_PASSWORD`
   - `JENKINS_ADMIN_ID`
@@ -26,4 +27,19 @@ Jenkins setup on docker via Jenkins configuration as code (JCasC)
 
   ```shell
     docker-compose --env-file <.env file created> up --build -d
+  ```
+
+## Build
+
+### Using docker command
+- Run the following command to build the image
+  ```shell
+    docker build -t <image_name>:<tag_name> .
+  ```
+
+### Using docker-compose
+
+- Run the following command
+  ```shell
+    docker-compose build 
   ```
