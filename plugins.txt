@@ -62,7 +62,7 @@ workflow-aggregator
 workflow-api
 workflow-basic-steps
 workflow-cps
-workflow-cps-global-lib
+pipeline-groovy-lib
 workflow-durable-task-step
 workflow-job
 workflow-multibranch
