@@ -4,28 +4,45 @@ unclassified:
   shell:
     shell: "/bin/bash"
 jenkins:
-  systemMessage: "Jenkins configured using Jenkins Configuration as Code plugin\n\n"
+  systemMessage: "Jenkins - ${COMPANY_NAME:-Farazmd}\n"
   securityRealm:
     local:
       allowsSignup: false
       users:
-       - id: ${JENKINS_ADMIN_ID}
-         password: ${JENKINS_ADMIN_PASSWORD}
+        - id: ${JENKINS_ADMIN_ID:-admin}
+          password: ${JENKINS_ADMIN_PASSWORD:-admin}
+        - id: ${JENKINS_USER_ID:-user1}
+          password: ${JENKINS_USER_PASSWORD:-user1}
   authorizationStrategy:
-    globalMatrix:
-      permissions:
-        - "Overall/Administer:${JENKINS_ADMIN_ID}"
-        - "Overall/Read:authenticated"
+    roleBased:
+      roles:
+        global:
+          - name: "admin"
+            description: "Jenkins administrators"
+            permissions:
+              - "Overall/Administer"
+            assignments:
+              - "${JENKINS_ADMIN_ID:-admin}"
+          - name: "readonly"
+            description: "Read-only users"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+            assignments:
+              - "authenticated"
   remotingSecurity:
     enabled: true
+  projectNamingStrategy:
+    roleBased:
+      forceExistingJobs: true
 security:
   queueItemAuthenticator:
     authenticators:
-    - global:
-        strategy: triggeringUsersAuthorizationStrategy
+      - global:
+          strategy: triggeringUsersAuthorizationStrategy
 
 tool:
   git:
     installations:
       - name: git
-        home: /usr/local/bin/git
+        home: /usr/bin/git

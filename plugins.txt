@@ -5,7 +5,6 @@ authentication-tokens
 authorize-project
 block-queued-job
 branch-api
-build-pipeline-plugin
 cloudbees-folder
 conditional-buildstep
 config-file-provider
@@ -49,6 +48,7 @@ pipeline-stage-view
 pipeline-utility-steps
 plain-credentials
 promoted-builds
+role-strategy
 run-condition
 scm-api
 script-security
