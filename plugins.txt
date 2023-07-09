@@ -14,6 +14,8 @@ credentials
 credentials-binding
 docker-commons
 docker-workflow
+docker-plugin
+docker-java-api
 downstream-ext
 durable-task
 embeddable-build-status
@@ -49,6 +51,7 @@ pipeline-utility-steps
 plain-credentials
 promoted-builds
 role-strategy
+rebuild
 run-condition
 scm-api
 script-security

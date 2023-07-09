@@ -1,0 +1,67 @@
+unclassified:
+  location:
+    url: http://${JENKINS_SERVER}:8080/
+  shell:
+    shell: "/bin/bash"
+jenkins:
+  systemMessage: "Jenkins - ${COMPANY_NAME:-Farazmd}\n"
+  numExecutors: 0
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: ${JENKINS_ADMIN_ID:-admin}
+          password: ${JENKINS_ADMIN_PASSWORD:-admin}
+        - id: ${JENKINS_USER_ID:-user1}
+          password: ${JENKINS_USER_PASSWORD:-user1}
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: "admin"
+            description: "Jenkins administrators"
+            permissions:
+              - "Overall/Administer"
+            assignments:
+              - "${JENKINS_ADMIN_ID:-admin}"
+          - name: "readonly"
+            description: "Read-only users"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+            assignments:
+              - "authenticated"
+  projectNamingStrategy:
+    roleBased:
+      forceExistingJobs: true
+  clouds:
+    - docker:
+        name: "docker"
+        dockerApi:
+          dockerHost:
+            uri: "unix:///var/run/docker.sock"
+        templates:
+          - labelString: "docker-agent"
+            dockerTemplateBase:
+              image: "localhost:5001/jenkins_inbound_worker:0.0.1"
+              mounts:
+                - "type=tmpfs,destination=/run"
+                - "type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock"
+            remoteFs: "/home/jenkins/agent"
+            connector:
+              attach:
+                user: "jenkins"
+            instanceCapStr: "10"
+            retentionStrategy:
+              idleMinutes: 1
+            pullStrategy: PULL_NEVER
+security:
+  queueItemAuthenticator:
+    authenticators:
+      - global:
+          strategy: triggeringUsersAuthorizationStrategy
+tool:
+  git:
+    installations:
+      - name: git
+        home: /usr/bin/git

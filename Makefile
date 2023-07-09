@@ -7,3 +7,6 @@ build:
 
 up:
 	${COMPOSE} up -d
+
+down: 
+	${COMPOSE} down
