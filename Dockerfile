@@ -16,7 +16,5 @@ RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 COPY --from=docker:dind --chown=jenkins:jenkins /usr/local/bin/docker /usr/local/bin/
 
 USER jenkins
-RUN mkdir -p /var/run/
-VOLUME ["/var/run"]
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
