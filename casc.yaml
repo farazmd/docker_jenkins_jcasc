@@ -1,3 +1,6 @@
+configuration-as-code:
+  version: 1
+  deprecated: warn
 unclassified:
   location:
     url: http://${JENKINS_SERVER}:8080/
@@ -17,19 +20,66 @@ jenkins:
     roleBased:
       roles:
         global:
-          - name: "admin"
-            description: "Jenkins administrators"
+          - entries:
+              - user: "${JENKINS_ADMIN_ID:-admin}"
+            name: "admin"
+            pattern: ".*"
             permissions:
               - "Overall/Administer"
-            assignments:
-              - "${JENKINS_ADMIN_ID:-admin}"
-          - name: "readonly"
-            description: "Read-only users"
+          - entries:
+              - user: "${JENKINS_UDER_ID:-user1}"
+            name: "dev"
+            pattern: ".*"
+            permissions:
+              - "Agent/Provision"
+              - "Job/Cancel"
+              - "Overall/Read"
+              - "Job/Build"
+              - "Job/Create"
+              - "View/Create"
+              - "Job/Read"
+              - "Job/Configure"
+              - "Job/Workspace"
+              - "View/Read"
+              - "View/Configure"
+          - name: "lead"
+            pattern: ".*"
+            permissions:
+              - "Job/Move"
+              - "Job/Build"
+              - "Credentials/Delete"
+              - "View/Create"
+              - "Agent/Configure"
+              - "Job/Read"
+              - "Credentials/Update"
+              - "Agent/Create"
+              - "Job/Delete"
+              - "Agent/Build"
+              - "View/Configure"
+              - "Agent/Provision"
+              - "Job/Create"
+              - "Job/Discover"
+              - "Credentials/View"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+              - "Run/Delete"
+              - "Job/Cancel"
+              - "Overall/Read"
+              - "Run/Update"
+              - "Credentials/Create"
+              - "View/Delete"
+              - "Job/Configure"
+              - "Job/Workspace"
+              - "View/Read"
+              - "Job/ViewStatus"
+          - entries:
+              - group: "authenticated"
+            name: "readonly"
+            pattern: ".*"
             permissions:
               - "Overall/Read"
               - "Job/Read"
-            assignments:
-              - "authenticated"
   remotingSecurity:
     enabled: true
   projectNamingStrategy:

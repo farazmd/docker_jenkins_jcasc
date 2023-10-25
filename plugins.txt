@@ -12,6 +12,7 @@ copyartifact
 configuration-as-code:latest
 credentials
 credentials-binding
+digitalocean-plugin:1.3.1
 docker-commons
 docker-workflow
 docker-plugin
@@ -49,9 +50,9 @@ pipeline-stage-tags-metadata
 pipeline-stage-view
 pipeline-utility-steps
 plain-credentials
-promoted-builds
+promoted-builds:892.vd6219fc0a_efb
 role-strategy
-rebuild
+rebuild:1.34
 run-condition
 scm-api
 script-security
