@@ -6,14 +6,20 @@ ENV BASH_ENV /home/jenkins/.bashrc
 
 USER root
 
-RUN apt-get update && apt-get upgrade -y && apt-get -y install sudo
-RUN apt-get install -y git curl python3 python3-pip python3-dev python3-venv
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get -y install sudo && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
+RUN apt-get install -y git \
+    curl && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
+
 RUN mkdir -p /home/jenkins && cd /home/jenkins && touch .bashrc && \
     usermod -d /home/jenkins jenkins && chown -R jenkins:jenkins /home/jenkins && \
     usermod --shell /bin/bash jenkins
 RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-COPY --from=docker:dind --chown=jenkins:jenkins /usr/local/bin/docker /usr/local/bin/
 
 USER jenkins
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt

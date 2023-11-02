@@ -1,6 +1,6 @@
 COMPOSE=docker compose
 
-.PHONY: up build
+.PHONY: up build down
 
 build:
 	docker build -t jenkins_jcasc:${JENKINS_VERSION} .

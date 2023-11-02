@@ -2,7 +2,7 @@ version: "3"
 services:
   jenkins:
     user: jenkins
-    image: farazmd/jenkins_jcasc_master:${JENKINS_VERSION}
+    image: ${JENKINS_IMAGE}
     container_name: jenkins
     ports:
       - 8080:8080
