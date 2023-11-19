@@ -60,6 +60,8 @@ dockerBuildAndPublish() {
     --platform linux/amd64 \
     --tag ${DOCKERHUB_NAMESPACE}/jenkins_jcasc:${imageType}-${imageVersion} \
     -f ${contextFile} .
+    docker buildx stop jenkins_jcasc_builder
+    docker buildx rm jenkins_jcasc_builder
 }
 
 dockerBuildAndLoad() {
