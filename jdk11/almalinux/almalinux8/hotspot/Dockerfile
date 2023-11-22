@@ -9,9 +9,11 @@ USER root
 RUN dnf update -y && \
     dnf upgrade -y && \
     dnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y sudo  && \
-    dnf clean all
-RUN dnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y git curl python3.11 && \ 
-    dnf clean all
+    dnf clean all && \
+    rm -rf /var/cache/dnf/*
+RUN dnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y git curl && \ 
+    dnf clean all && \
+    rm -rf /var/cache/dnf/*
 RUN mkdir -p /home/jenkins && cd /home/jenkins && touch .bashrc && \
     usermod -d /home/jenkins jenkins && chown -R jenkins:jenkins /home/jenkins && \
     usermod --shell /bin/bash jenkins

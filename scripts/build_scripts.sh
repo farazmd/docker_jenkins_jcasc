@@ -20,7 +20,7 @@ getImageVersion() {
     fi
     imageVersion=$(cat ${versionFile})
     if [ "${isSnapshot}" == "true" ]; then
-        timestamp=$(date +"%Y%M%d%H%M%S")
+        timestamp=$(date +"%Y%m%d%H%M%S")
         echo "${imageVersion}-${timestamp}-SNAPSHOT"
     else
         echo "${imageVersion}"
